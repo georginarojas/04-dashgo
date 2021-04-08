@@ -10,7 +10,7 @@ export function Header() {
       height="20"
       marginX="auto"
       marginTop="4"
-      paddingX="16"
+      paddingX="20"
       align="center"
     >
       <Text fontSize="3xl" fontWeight="bold" letterSpacing="tight" width="64">
