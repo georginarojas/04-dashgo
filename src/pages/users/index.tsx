@@ -1,6 +1,6 @@
 import React from "react";
 import { Header } from "../../components/Header";
-import { SiderBar } from "../../components/SideBar";
+import { SiderBar } from "../../components/Sidebar";
 import {
   Box,
   Button,
