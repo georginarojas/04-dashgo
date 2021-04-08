@@ -17,6 +17,7 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
+import { Pagination } from "../../components/Pagination";
 
 export default function UserList() {
   return (
@@ -41,7 +42,7 @@ export default function UserList() {
               size="sm"
               fontSize="sm"
               colorScheme="pink"
-              leftIcon={<Icon as={RiAddLine} fontSize="20"/>}
+              leftIcon={<Icon as={RiAddLine} fontSize="20" />}
             >
               Criar novo
             </Button>
@@ -78,14 +79,43 @@ export default function UserList() {
                     size="sm"
                     fontSize="sm"
                     colorScheme="pink"
-                    leftIcon={<Icon as={RiPencilLine} fontSize="16"/>}
+                    leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
                   >
                     Editar
                   </Button>
                 </Td>
               </Tr>
+
+              <Tr>
+                <Td paddingX="6">
+                  <Checkbox colorScheme="pink" />
+                </Td>
+                <Td>
+                  <Box>
+                    <Text fontWeight="bold">Georgina Rojas</Text>
+                    <Text fontSize="sm" color="gray.300">
+                      ginarojas29@gmail.com
+                    </Text>
+                  </Box>
+                </Td>
+                <Td>07 de abirl, 2021</Td>
+                <Td>
+                  <Button
+                    as="a"
+                    size="sm"
+                    fontSize="sm"
+                    colorScheme="pink"
+                    leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
+                  >
+                    Editar
+                  </Button>
+                </Td>
+              </Tr>
+
             </Tbody>
           </Table>
+
+          <Pagination />
         </Box>
       </Flex>
     </Box>
