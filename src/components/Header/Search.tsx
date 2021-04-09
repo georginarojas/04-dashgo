@@ -24,7 +24,7 @@ export function Search() {
       background="gray.800"
       borderRadius="full"
     >
-      {/* variant="unstyled" is an input without boder and background */}
+      {/* variant="unstyled" is an input without border and background */}
       <Input
         color="gray.50"
         variant="unstyled"
