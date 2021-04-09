@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { Header } from "../../components/Header";
 import { SiderBar } from "../../components/Sidebar";
 import {
@@ -42,15 +43,18 @@ export default function UserList() {
             <Heading size="lg" fontWeight="normal">
               Usuários
             </Heading>
-            <Button
-              as="a"
-              size="sm"
-              fontSize="sm"
-              colorScheme="pink"
-              leftIcon={<Icon as={RiAddLine} fontSize="20" />}
-            >
-              Criar novo
-            </Button>
+
+            <Link href="/users/create" passHref>
+              <Button
+                as="a"
+                size="sm"
+                fontSize="sm"
+                colorScheme="pink"
+                leftIcon={<Icon as={RiAddLine} fontSize="20" />}
+              >
+                Criar novo
+              </Button>
+            </Link>
           </Flex>
 
           <Table colorScheme="whiteAlpha">
@@ -61,7 +65,7 @@ export default function UserList() {
                 </Th>
                 <Th>Usuário</Th>
                 {isWideVersion && <Th>Data de cadastro</Th>}
-                {isWideVersion && <Th width="8"> </Th> }
+                {isWideVersion && <Th width="8"> </Th>}
               </Tr>
             </Thead>
             <Tbody>
@@ -78,18 +82,19 @@ export default function UserList() {
                   </Box>
                 </Td>
                 {isWideVersion && <Td>07 de abirl, 2021</Td>}
-                {isWideVersion &&
-                <Td>
-                  <Button
-                    as="a"
-                    size="sm"
-                    fontSize="sm"
-                    colorScheme="pink"
-                    leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
-                  >
-                    Editar
-                  </Button>
-                </Td> }
+                {isWideVersion && (
+                  <Td>
+                    <Button
+                      as="a"
+                      size="sm"
+                      fontSize="sm"
+                      colorScheme="pink"
+                      leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
+                    >
+                      Editar
+                    </Button>
+                  </Td>
+                )}
               </Tr>
 
               <Tr>
@@ -105,19 +110,19 @@ export default function UserList() {
                   </Box>
                 </Td>
                 {isWideVersion && <Td>07 de abirl, 2021</Td>}
-                {isWideVersion &&
-                <Td>
-                  <Button
-                    as="a"
-                    size="sm"
-                    fontSize="sm"
-                    colorScheme="pink"
-                    leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
-                  >
-                    Editar
-                  </Button>
-                </Td>
-                }
+                {isWideVersion && (
+                  <Td>
+                    <Button
+                      as="a"
+                      size="sm"
+                      fontSize="sm"
+                      colorScheme="pink"
+                      leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
+                    >
+                      Editar
+                    </Button>
+                  </Td>
+                )}
               </Tr>
             </Tbody>
           </Table>

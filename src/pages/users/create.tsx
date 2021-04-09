@@ -1,4 +1,6 @@
 import React from "react";
+import Link from "next/link";
+
 import { Header } from "../../components/Header";
 import { SiderBar } from "../../components/Sidebar";
 import {
@@ -27,7 +29,12 @@ export default function CreateUser() {
       >
         <SiderBar />
 
-        <Box flex="1" borderRadius={8} background="gray.800" padding={["6", "8"]}>
+        <Box
+          flex="1"
+          borderRadius={8}
+          background="gray.800"
+          padding={["6", "8"]}
+        >
           <Heading size="lg" fontWeight="normal">
             Criar usuário
           </Heading>
@@ -64,7 +71,11 @@ export default function CreateUser() {
 
           <Flex marginTop="10" justify="flex-end">
             <HStack spacing="4">
-              <Button colorScheme="whiteAlpha">Cancelar</Button>
+              <Link href="/users" passHref>
+                <Button as="a" colorScheme="whiteAlpha">
+                  Cancelar
+                </Button>
+              </Link>
               <Button colorScheme="pink">Salvar</Button>
             </HStack>
           </Flex>
