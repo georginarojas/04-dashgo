@@ -20,7 +20,7 @@ export function ActiveLink({
     isActive = true;
   }
 
-  //For only the begining the url exact to href
+  //For only the beginning of url exact to href
   if (
     !shouldMatchExactHref &&
     (asPath.startsWith(String(rest.href)) || asPath.startsWith(String(rest.as)))
