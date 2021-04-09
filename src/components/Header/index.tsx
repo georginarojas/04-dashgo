@@ -23,7 +23,7 @@ export function Header() {
       height="20"
       marginX="auto"
       marginTop="4"
-      paddingX="20"
+      paddingX={["5", "6", "20"]}
       align="center"
     >
       {/* aria-label this mean what this button doing */}

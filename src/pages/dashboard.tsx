@@ -76,7 +76,7 @@ export default function Dashboard() {
         marginY="6"
         maxWidth={1480}
         marginX="auto"
-        paddingX="20"
+        paddingX={["5", "6", "20"]}
       >
         <SiderBar />
 
