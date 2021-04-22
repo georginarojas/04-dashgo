@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { Header } from "../../components/Header";
 import { SiderBar } from "../../components/Sidebar";
@@ -21,11 +21,19 @@ import {
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Pagination } from "../../components/Pagination";
 
+
 export default function UserList() {
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true,
   });
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/users")
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  }, []);
+
   return (
     <Box>
       <Header />
