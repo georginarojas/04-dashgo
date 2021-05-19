@@ -31,7 +31,7 @@ export function makeServer() {
 
     // "Seeds" https://miragejs.com/tutorial/part-4/#gatsby-focus-wrapper
     seeds(server) {
-      server.createList("user", 200); // 200 users
+      server.createList("user", 10); // 10 users
     },
 
     routes() {
