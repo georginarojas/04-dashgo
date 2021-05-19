@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Link from "next/link";
-import { useQuery } from "react-query";
 
 import { Header } from "../../components/Header";
 import { SiderBar } from "../../components/Sidebar";
@@ -23,28 +22,11 @@ import {
 } from "@chakra-ui/react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Pagination } from "../../components/Pagination";
+import { useUsers } from "../../services/hooks/useUsers";
 
 export default function UserList() {
   // Queries
-  const { data, isLoading, error } = useQuery("users", async () => {
-    const response = await fetch("http://localhost:8080/api/users");
-    const data = await response.json();
-
-    const users = data.users.map((user) => {
-      return {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        createdAt: new Date(user.createdAt).toLocaleDateString("pt-BR", {
-          day: "2-digit",
-          month: "long",
-          year: "numeric",
-        }),
-      };
-    });
-
-    return users;
-  });
+  const { data, isLoading, error, isFetching } = useUsers();
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -67,6 +49,9 @@ export default function UserList() {
           <Flex marginBottom="8" justify="space-between" align="center">
             <Heading size="lg" fontWeight="normal">
               Usuários
+              {!isLoading && isFetching && (
+                <Spinner size="sm" color="gray.500" ml="4" />
+              )}
             </Heading>
 
             <Link href="/users/create" passHref>
