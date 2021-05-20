@@ -1,5 +1,6 @@
-import { createServer, Factory, Model } from "miragejs";
+import { createServer, Factory, Model, Response } from "miragejs";
 import faker from "faker";
+import users from "../../pages/users";
 
 type User = {
   name: string;
@@ -31,18 +32,41 @@ export function makeServer() {
 
     // "Seeds" https://miragejs.com/tutorial/part-4/#gatsby-focus-wrapper
     seeds(server) {
-      server.createList("user", 10); // 10 users
+      server.createList("user", 200); // 10 users
     },
-
+    // https://miragejs.com/docs/main-concepts/route-handlers/
     routes() {
       this.namespace = "api";
       // this.urlPrefix = 'http://localhost:8080'
       this.timing = 750; // Delay of 750 milliseconds
 
-      //https://miragejs.com/docs/main-concepts/shorthands/
-      this.get("/users");
-      this.post("/users");
+      //https://miragejs.com/docs/main-concepts/shorthands/   (get and post)
 
+      // Creating a pagination
+      this.get("/users", function (scheme, request) {
+        // 10 data for page
+        const { page = 1, per_page = 10 } = request.queryParams;
+
+        const total = scheme.all("user").length;
+
+        const pageStart = (Number(page) - 1) * Number(per_page);
+        const pageEnd = pageStart + Number(per_page);
+
+        const users = this.serialize(scheme.all("user")).users.slice(
+          pageStart,
+          pageEnd
+        );
+
+        return new Response(
+          200,
+          // headers
+          { "x-total-count": String(total) }, // x-total-count is a convencional name
+          { users }
+        );
+        
+      });
+
+      this.post("/users");
 
       // Reset the namespace for not have conflicts with our api routes in other files
       this.namespace = "";

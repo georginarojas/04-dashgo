@@ -8,12 +8,23 @@ type User = {
   createdAt: string;
 };
 
+type GetUserResponse = {
+  totalCount: number;
+  users: User[];
+};
+
 // 1-way
 // export async function getUsers() { ... }
 // 2-way (promise because is a async function)
 // export async function getUsers(): Promise<User[]> { ... }
-export async function getUsers(): Promise<User[]> {
-  const { data } = await api.get("/users");
+export async function getUsers(page: number): Promise<GetUserResponse> {
+  const { data, headers } = await api.get("/users", {
+    params: {
+      page,
+    },
+  });
+
+  const totalCount = Number(headers["x-total-count"]);
 
   const users = data.users.map((user) => {
     return {
@@ -28,15 +39,19 @@ export async function getUsers(): Promise<User[]> {
     };
   });
 
-  return users;
+  return {
+    users,
+    totalCount,
+  };
 }
 
-export function useUsers() {
+export function useUsers(page: number) {
   // 1-way
   //return useQuery<User[]>( ... )
   // 2-way
   //return useQuery( ... )
-  return useQuery("users", getUsers, {
+  // we use an arrow function because we need to execute the function only when the query be launched
+  return useQuery(["users", page], () => getUsers(page), {
     staleTime: 1000 * 5, // 5 seconds
   });
 }
