@@ -1,4 +1,10 @@
-import { createServer, Factory, Model, Response } from "miragejs";
+import {
+  createServer,
+  Factory,
+  Model,
+  Response,
+  ActiveModelSerializer,
+} from "miragejs";
 import faker from "faker";
 import users from "../../pages/users";
 
@@ -10,6 +16,12 @@ type User = {
 
 export function makeServer() {
   const server = createServer({
+
+    // For to work with relational DB.
+    serializers: {
+      application: ActiveModelSerializer,
+    },
+
     models: {
       user: Model.extend<Partial<User>>({}), // can have some data of user object
     },
@@ -63,7 +75,6 @@ export function makeServer() {
           { "x-total-count": String(total) }, // x-total-count is a convencional name
           { users }
         );
-
       });
 
       this.get("/users/:id");

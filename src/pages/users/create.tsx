@@ -1,5 +1,8 @@
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+
+import { useMutation } from "react-query";
 
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -7,7 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Input } from "../../components/Form/Input";
 import { Header } from "../../components/Header";
-import { SiderBar } from "../../components/Sidebar";
+import { Sidebar } from "../../components/Sidebar";
 import {
   Box,
   Button,
@@ -18,12 +21,14 @@ import {
   SimpleGrid,
   VStack,
 } from "@chakra-ui/react";
+import { api } from "../../services/api";
+import { queryClient } from "../../services/mirage/queryClient";
 
 type CreateUserFormData = {
   name: string;
   email: string;
   password: string;
-  password_corfirmation: string;
+  password_confirmation: string;
 };
 
 const createUserFormSchema = yup.object().shape({
@@ -33,12 +38,34 @@ const createUserFormSchema = yup.object().shape({
     .string()
     .required("Senha obrigatória")
     .min(6, "No mínimo 6 caractere"),
-  password_corfirmation: yup
+  password_confirmation: yup
     .string()
     .oneOf([null, yup.ref("password")], "As senha devem ser iguais"),
 });
 
 export default function CreateUser() {
+  const router = useRouter();
+
+  const createUser = useMutation(
+    async (user: CreateUserFormData) => {
+      const response = await api.post("users", {
+        user: {
+          ...user,
+          created_at: new Date(),
+        },
+      });
+
+      return response.data.user;
+    },
+    {
+      onSuccess: () => {
+        // invalidate all the queries if we want to invalidate a specific page
+        // put ["users", numberPage]
+        queryClient.invalidateQueries("users");
+      },
+    }
+  );
+
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(createUserFormSchema),
   });
@@ -48,8 +75,8 @@ export default function CreateUser() {
   const handleCreateUser: SubmitHandler<CreateUserFormData> = async (
     values
   ) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log(values);
+    await createUser.mutateAsync(values);
+    router.push("/users");
   };
 
   return (
@@ -62,7 +89,7 @@ export default function CreateUser() {
         marginX="auto"
         paddingX={["5", "6", "20"]}
       >
-        <SiderBar />
+        <Sidebar />
 
         <Box
           as="form"
@@ -110,11 +137,11 @@ export default function CreateUser() {
               </Box>
               <Box>
                 <Input
-                  name="password_corfirmation"
+                  name="password_confirmation"
                   type="password"
-                  error={errors.password_corfirmation}
+                  error={errors.password_confirmation}
                   label="Confirmar senha"
-                  {...register("password_corfirmation")}
+                  {...register("password_confirmation")}
                 />
               </Box>
             </SimpleGrid>

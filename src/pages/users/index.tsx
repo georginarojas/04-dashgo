@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import NextLink from "next/link";
 
 import { Header } from "../../components/Header";
-import { SiderBar } from "../../components/Sidebar";
+import { Sidebar } from "../../components/Sidebar";
 import {
   Box,
   Button,
@@ -38,7 +38,7 @@ export default function UserList() {
   });
 
   // Data prefetch
-  async function handlePrefetchUser(userId: number) {
+  async function handlePrefetchUser(userId: string) {
     await queryClient.prefetchQuery(
       ["user", userId],
       async () => {
@@ -62,7 +62,7 @@ export default function UserList() {
         marginX="auto"
         paddingX={["5", "6", "20"]}
       >
-        <SiderBar />
+        <Sidebar />
 
         <Box flex="1" borderRadius={8} background="gray.800" padding="8">
           <Flex marginBottom="8" justify="space-between" align="center">
