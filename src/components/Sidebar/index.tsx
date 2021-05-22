@@ -9,10 +9,10 @@ import {
   DrawerOverlay,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { SiderbarNav } from "./SiderbarNav";
+import { SidebarNav } from "./SidebarNav";
 import { useSidebarDrawer } from "../../contexts/SidebarDrawerContext";
 
-export function SiderBar() {
+export function Sidebar() {
   const { isOpen, onClose } = useSidebarDrawer();
 
   const isDrawerSidebar = useBreakpointValue({
@@ -29,7 +29,7 @@ export function SiderBar() {
             <DrawerHeader>Navegação</DrawerHeader>
 
             <DrawerBody>
-              <SiderbarNav />
+              <SidebarNav />
             </DrawerBody>
           </DrawerContent>
         </DrawerOverlay>
@@ -40,7 +40,7 @@ export function SiderBar() {
   return (
     // align='flex-start' is everything align to the left
     <Box as="aside" width="64" marginRight="8">
-      <SiderbarNav />
+      <SidebarNav />
     </Box>
   );
 }

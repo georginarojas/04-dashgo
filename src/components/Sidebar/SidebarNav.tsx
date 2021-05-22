@@ -9,7 +9,7 @@ import { NavSection } from "./NavSection";
 import { NavLink } from "./NavLink";
 
 
-export function SiderbarNav() {
+export function SidebarNav() {
   return (
     <Stack spacing="12" align="flex-start">
       <NavSection title="GERAL">

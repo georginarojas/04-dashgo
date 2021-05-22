@@ -2,7 +2,7 @@ import React from "react";
 import dynamic from "next/dynamic";
 import { Box, Flex, SimpleGrid, Text, theme } from "@chakra-ui/react";
 import { Header } from "../components/Header";
-import { SiderBar } from "../components/Sidebar";
+import { Sidebar } from "../components/Sidebar";
 
 // --- Chart config and import - start
 
@@ -78,7 +78,7 @@ export default function Dashboard() {
         marginX="auto"
         paddingX={["5", "6", "20"]}
       >
-        <SiderBar />
+        <Sidebar />
 
         {/* minChildWidth='320' The width at which child elements will break into columns. */}
         <SimpleGrid flex="1" gap="4" minChildWidth="320px" align="flex-start">
