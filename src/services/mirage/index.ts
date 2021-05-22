@@ -63,9 +63,10 @@ export function makeServer() {
           { "x-total-count": String(total) }, // x-total-count is a convencional name
           { users }
         );
-        
+
       });
 
+      this.get("/users/:id");
       this.post("/users");
 
       // Reset the namespace for not have conflicts with our api routes in other files
