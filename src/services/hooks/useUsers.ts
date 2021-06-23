@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery, UseQueryOptions } from "react-query";
 import { api } from "../api";
 
 type User = {
@@ -45,7 +45,7 @@ export async function getUsers(page: number): Promise<GetUserResponse> {
   };
 }
 
-export function useUsers(page: number) {
+export function useUsers(page: number, /*options: UseQueryOptions */) {
   // 1-way
   //return useQuery<User[]>( ... )
   // 2-way
@@ -53,5 +53,6 @@ export function useUsers(page: number) {
   // we use an arrow function because we need to execute the function only when the query be launched
   return useQuery(["users", page], () => getUsers(page), {
     staleTime: 1000 * 60 * 5, // 5 minutes
+    // ...options,
   });
 }
